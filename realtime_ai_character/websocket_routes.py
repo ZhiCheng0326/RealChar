@@ -200,6 +200,7 @@ async def handle_receive(websocket: WebSocket, session_id: str, user_id: str, db
             # handle text message
             if 'text' in data:
                 msg_data = data['text']
+                logger.info(f'transcript before filter: {msg_data}')
                 # Handle client side commands
                 if msg_data.startswith('[!'):
                     command_end = msg_data.find(']')
@@ -225,6 +226,7 @@ async def handle_receive(websocket: WebSocket, session_id: str, user_id: str, db
                                 character.voice_id)))
                     continue
                 # 1. Send message to LLM
+                logger.info(f'Send message to LLM')
                 response = await llm.achat(
                     history=build_history(conversation_history),
                     user_input=msg_data,

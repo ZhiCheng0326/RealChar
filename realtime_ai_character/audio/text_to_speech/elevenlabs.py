@@ -54,7 +54,7 @@ class ElevenLabs(Singleton, TextToSpeech):
             response = await client.post(url, json=data, headers=headers)
             if response.status_code != 200:
                 logger.error(f"ElevenLabs returns response {response.status_code}")
-            async for chunk in response.aiter_bytes():
+            async for chunk in response.aiter_bytes(): # chunk is bytes type
                 await asyncio.sleep(0.1)
                 if tts_event.is_set():
                     # stop streaming audio

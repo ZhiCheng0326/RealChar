@@ -8,12 +8,12 @@ body {
 }
 
 /* CSS for mobile warning message and desktop content */
-@media (max-width: 768px) {
+@media (max-width: 1px) {
   #desktop-content { display: none; }
   #mobile-warning { display: block; }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1px) {
   #desktop-content { display: flex; }
   #mobile-warning { display: none; }
 }

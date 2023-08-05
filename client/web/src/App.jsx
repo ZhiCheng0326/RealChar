@@ -48,8 +48,8 @@ const App = () => {
   const audioQueue = useRef([]);
   const isConnecting = useRef(false);
   const isConnected = useRef(false);
-  const isMobile = window.innerWidth <= 768; 
-  
+  const isMobile = window.innerWidth <= 1; 
+  console.log(isMobile);
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {

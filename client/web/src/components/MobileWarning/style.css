@@ -6,10 +6,10 @@
     margin-bottom: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1px) {
     #mobile-warning { display: block; }
 }
   
-@media (min-width: 769px) {
+@media (min-width: 1px) {
     #mobile-warning { display: none; }
 }

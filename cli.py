@@ -41,7 +41,7 @@ def docker_run(name, db_file):
         subprocess.run(["docker", "run", "--env-file", ".env", "--name", name, "-p", "8000:8000",
                         "-v", f"{os.path.abspath(db_file)}:/realtime_ai_character/test.db", name])
     else:
-        subprocess.run(["docker", "run", "--env-file", ".env",
+        subprocess.run(["docker", "run", "--env-file", ".env", "-v", "/home/zhicheng/livenessDev/RealChar:/realchar", 
                        "--name", name, "-p", "8000:8000", name])
 
 
