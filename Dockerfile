@@ -1,13 +1,14 @@
-FROM python:slim
+FROM shaunly/real_char:latest
 
 # Install system-level dependencies
-RUN apt-get update && apt-get install -y build-essential portaudio19-dev libffi-dev libssl-dev ffmpeg
+RUN apt-get update && apt-get install -y build-essential portaudio19-dev libffi-dev libssl-dev ffmpeg espeak
 
 WORKDIR /realtime_ai_character
 
 # Install Python dependencies
 COPY requirements.txt /realtime_ai_character
 RUN pip install -r /realtime_ai_character/requirements.txt
+RUN pip install TTS mecab-python3 unidic-lite
 
 # Copy the project files
 COPY ./ /realtime_ai_character
