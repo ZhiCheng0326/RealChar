@@ -70,8 +70,9 @@ class CatalogManager(Singleton):
         path = Path(__file__).parent
         excluded_dirs = {'__pycache__', 'archive', 'community'}
 
-        directories = [d for d in path.iterdir() if d.is_dir()
-                       and d.name not in excluded_dirs]
+        # directories = [d for d in path.iterdir() if d.is_dir()
+        #                and d.name not in excluded_dirs]
+        directories = [d for d in path.iterdir() if d.is_dir() and d.name == 'jingkai']
 
         for directory in directories:
             character_name = self.load_character(directory)

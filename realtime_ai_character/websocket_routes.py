@@ -160,7 +160,7 @@ async def handle_receive(websocket: WebSocket, session_id: str, user_id: str, db
         token_buffer = []
 
         # Greet the user
-        greeting_text = GREETING_TXT_MAP[language]
+        greeting_text = f"Hi, my name is {character.name}, how may I help you?"
         await manager.send_message(message=greeting_text, websocket=websocket)
         tts_task = asyncio.create_task(
             text_to_speech.stream(
