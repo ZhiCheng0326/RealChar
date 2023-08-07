@@ -58,7 +58,7 @@ __Demo settings: Web, GPT4, ElevenLabs with voice clone, Chroma, Google Speech t
     <img src="https://storage.googleapis.com/assistly/static/realchar/techstack.png" alt="RealChar-tech-stack" width="100%"  style="padding: 20px"/>
 </div>
 
-- ✅**Web**: [Vanilla JS](http://vanilla-js.com/), [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+- ✅**Web**: [React JS](https://react.dev/), [Vanilla JS](http://vanilla-js.com/), [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 - ✅**Mobile**: [Swift](https://developer.apple.com/swift/), [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 - ✅**Backend**: [FastAPI](https://fastapi.tiangolo.com/), [SQLite](https://www.sqlite.org/index.html), [Docker](https://www.docker.com/)
 - ✅**Data Ingestion**: [LlamaIndex](https://www.llamaindex.ai/), [Chroma](https://www.trychroma.com/)
@@ -216,6 +216,7 @@ ELEVEN_LABS_API_KEY=<api key>
     - (Optional) mobile client: open `client/mobile/ios/rac/rac.xcodeproj/project.pbxproj` in Xcode and run the app
 - **Step 8**. Select one character to talk to, then start talking
 
+Note if you want to remotely connect to a RealChar server, SSL set up is required to establish the audio connection. 
 
 ## (Optional) 📀 Installation via Docker
 <details><summary>👇click me</summary>

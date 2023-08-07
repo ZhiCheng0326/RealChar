@@ -16,6 +16,7 @@ import { signInWithGoogle } from './components/Auth/SignIn';
 // Pages
 import Settings from './pages/Settings';
 import Conversation from './pages/Conversation';
+import SharedConversation from './pages/SharedConversation';
 import Home from './pages/Home';
 
 // utils
@@ -27,6 +28,7 @@ import useMediaRecorder from './hooks/useMediaRecorder';
 import useSpeechRecognition from './hooks/useSpeechRecognition';
 
 const App = () => {
+  const [sessionId, setSessionId] = useState('');
   const [preferredLanguage, setPreferredLanguage] = useState('English');
   const [selectedDevice, setSelectedDevice] = useState('');
   const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo-16k');
@@ -36,6 +38,7 @@ const App = () => {
   const [token, setToken] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isResponding, setIsResponding] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [messageInput, setMessageInput] = useState('');
   const [isCallView, setIsCallView] = useState(false);
@@ -87,6 +90,7 @@ const App = () => {
     if (typeof event.data === 'string') {
       const message = event.data;
       if (message === '[end]\n' || message.match(/\[end=([a-zA-Z0-9]+)\]/)) {
+        setIsResponding(false);
         setTextAreaValue(prevState => prevState + '\n\n');
         const messageIdMatches = message.match(/\[end=([a-zA-Z0-9]+)\]/);
         if (messageIdMatches) {
@@ -107,6 +111,7 @@ const App = () => {
         setTextAreaValue(prevState => prevState + '\n\n');
       } else {
         setIsThinking(false);
+        setIsResponding(true);
         setTextAreaValue(prevState => prevState + `${event.data}`);
 
         // if user interrupts the previous response, should be able to play audios of new response
@@ -133,7 +138,8 @@ const App = () => {
     selectedModel,
     preferredLanguage,
     useSearch,
-    selectedCharacter
+    selectedCharacter,
+    setSessionId
   );
   const {
     isRecording,
@@ -284,6 +290,7 @@ const App = () => {
                 isRecording={isRecording}
                 isPlaying={isPlaying}
                 isThinking={isThinking}
+                isResponding={isResponding}
                 audioPlayer={audioPlayer}
                 handleStopCall={handleStopCall}
                 handleContinueCall={handleContinueCall}
@@ -307,9 +314,11 @@ const App = () => {
                 selectedCharacter={selectedCharacter}
                 messageId={messageId}
                 token={token}
+                sessionId={sessionId}
               />
             }
           />
+          <Route path='/shared' element={<SharedConversation />} />
         </Routes>
 
         <Footer />
