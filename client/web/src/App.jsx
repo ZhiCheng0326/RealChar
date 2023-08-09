@@ -259,6 +259,7 @@ const App = () => {
                 setCharacterGroups={setCharacterGroups}
                 setCharacterConfirmed={setCharacterConfirmed}
                 characterConfirmed={characterConfirmed}
+                token={token}
               />
             }
           />

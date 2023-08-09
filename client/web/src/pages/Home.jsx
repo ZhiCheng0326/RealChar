@@ -11,6 +11,7 @@ import lz from 'lz-string';
 
 import Characters from '../components/Characters';
 import Button from '@mui/material/Button';
+import { getHostName } from '../utils/urlUtils';
 
 const Home = ({
   isMobile,
@@ -21,6 +22,7 @@ const Home = ({
   setCharacterGroups,
   setCharacterConfirmed,
   characterConfirmed,
+  token,
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -31,20 +33,17 @@ const Home = ({
 
     // Get host
     const scheme = window.location.protocol;
-    var currentHost = window.location.host;
-    var parts = currentHost.split(':');
-    var hostname = parts[0];
-    // Local deployment uses 8000 port by default.
-    var newPort = '8000';
-
-    if (!(hostname === 'localhost' || isIP(hostname))) {
-      hostname = 'api.' + hostname;
-      newPort = window.location.protocol === 'https:' ? 443 : 80;
+    const url = scheme + '//' + getHostName() + '/characters';
+    let headers = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
-    var newHost = hostname + ':' + newPort + '/characters';
-    const url = scheme + '//' + newHost;
-
-    fetch(url)
+    fetch(url, {
+      method: 'GET',
+      headers: headers,
+    })
       .then(response => response.json())
       .then(data => {
         setCharacterGroups(data);
@@ -54,7 +53,7 @@ const Home = ({
         setLoading(false);
         console.error(err);
       });
-  }, [setCharacterGroups]);
+  }, [setCharacterGroups, token]);
 
   const handleNextClick = () => {
     setCharacterConfirmed(true);
